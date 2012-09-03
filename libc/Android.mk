@@ -497,6 +497,7 @@ ifeq ($(TARGET_ARCH),arm)
   #
   # The value must match your kernel configuration
   #
+
   ifeq ($(ARCH_ARM_HAVE_TLS_REGISTER),true)
     libc_common_cflags += -DHAVE_ARM_TLS_REGISTER
   endif
@@ -553,6 +554,10 @@ libc_crt_target_cflags += -I$(LOCAL_PATH)/private
 
 ifeq ($(TARGET_ARCH),arm)
 libc_crt_target_cflags += -DCRT_LEGACY_WORKAROUND
+endif
+
+ifeq ($(BOARD_USE_NASTY_PTHREAD_CREATE_HACK),true)
+libc_common_cflags += -DNASTY_PTHREAD_CREATE_HACK
 endif
 
 # Define some common includes
